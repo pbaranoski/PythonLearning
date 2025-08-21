@@ -6,12 +6,9 @@ import sys
 #from numpy import exp
 import pandas
 import re
-import pathlib
-import datetime
 
-
-in_dir = r"C:\Users\PaulBaranoski\OneDrive - Index Analytics\Documents\PythonLearning\PythonLearning"
-out_dir = r"C:\Users\PaulBaranoski\OneDrive - Index Analytics\Documents\PythonLearning\PythonLearning"
+in_dir = r"C:\Users\user\Documents\PythonLearning"
+out_dir = r"C:\Users\user\Documents\PythonLearning"
 
 strSearch = "shutil"
 
@@ -47,9 +44,6 @@ for searchFile in fileList:
             fndIdx = in_rec.find(strSearch)
             if fndIdx >= 0:
                 print(inFilename)
-                #print(os.path.getmtime(inFilename))
-                dttm = pathlib.Path(inFilename).stat().st_mtime
-                print(datetime.datetime.fromtimestamp(dttm).strftime("%Y-%m-%d-%H:%M:%S"))
                 outResults.writelines(inFilename + "-->" + in_rec)
                 #print(in_rec)
 

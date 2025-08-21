@@ -1,27 +1,24 @@
 import tkinter as tk
-from tkinter import filedialog as fd
+from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import *
 from tkinter.tix import *
 
-import pandas as pd
-import openpyxl as excel
-from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
-from openpyxl.styles import Fill, Color
-
 import os
 
+#in_dir = r"C:\Users\user\Documents\PythonLearning"
+#out_dir = r"C:\Users\user\Documents\PythonLearning"
 
-def getDirPath (lblLabel):
+
+def getDirPath ():
     dirPath = tk.filedialog.askdirectory()
     print("##Directory: "+dirPath)
 
     #entry2.insert(0,str(dirPath))
-    lblLabel.config(text=dirPath)
-
+    lblFolderPathText.config(text=dirPath)
 
 def openNewWindow():
-    
+
     # Toplevel object which will
     # be treated as a new window
     ## This will hold content of Search Results
@@ -57,12 +54,11 @@ def updateScrollRegion():
 	cTableContainer.update_idletasks()
 	cTableContainer.config(scrollregion=fTable.bbox())
 
-
 def searchFiles():
-    
+
     # load variables with window values
     strSearch = txtSearchString.get()
-    in_dir = lblSearchDirText.cget("text")
+    in_dir = lblFolderPathText.cget("text")
 
     # Verify that input values have been entered/selected
     if in_dir == "":
@@ -118,80 +114,55 @@ def searchFiles():
 
     updateScrollRegion()
 
-
-    ###########################################
-    # Comparison has completed
-    ###########################################
     #messagebox.showinfo("Complete", "Results have been generated!")
+    #messagebox.showinfo("Complete", sSearchResults)
 
 
-def main():
+####################################################
+# MAIN
+####################################################
+MDIWnd= tk.Tk()
+MDIWnd.title("Search Window")
 
-    ####################################################
-    # define variables
-    ####################################################
-    global MDIWnd
-    global lblSearchDirText
-    global lblInFile2Text
-    global lblOutFileText
-    global txtSearchString
+canvas1 = tk.Canvas(MDIWnd, width = 800, height = 300,  relief = 'raised')
+canvas1.pack()
 
-    ####################################################
-    # Build window
-    ####################################################
-    MDIWnd= tk.Tk()
-    MDIWnd.title("Find Search String")
-    MDIWnd.geometry("1000x300")
+lblHdr = tk.Label(MDIWnd, text='Find Search String')
+lblHdr.config(font=('helvetica', 18))
+canvas1.create_window(350, 30, window=lblHdr)
 
-    lblHdr = tk.Label(MDIWnd, text='Find Search String')
-    lblHdr.config(font=('helvetica', 14))
-    lblHdr.grid(row=0, column=3, columnspan=3, padx=5, pady=10)
+# folder searching
+lblFolderPathLabel = tk.Label(MDIWnd, text='Folder Path to Search:')
+lblFolderPathLabel.config(font=('helvetica', 12))
+canvas1.create_window(100, 70, window=lblFolderPathLabel)
 
-    lblSpacer = tk.Label(MDIWnd, text="          ")
-    lblSpacer.grid(row=0, column=0)
+# folder searching
+lblFolderPathText = tk.Label(MDIWnd, text='')
+lblFolderPathText.config(font=('helvetica', 12))
+canvas1.create_window(330, 70, window=lblFolderPathText)
 
-    ##############################
-    # Select InFile1
-    ##############################
-    btnInFile1 = tk.Button(text='Select File', command=lambda:getDirPath(lblSearchDirText), bg='blue', fg='white', font=('helvetica', 8, 'bold'))
-    btnInFile1.grid(row=1, column=1, padx=5, pady=3)
+# Search string
+lblSearchString = tk.Label(MDIWnd, text='Enter Search String:')
+lblSearchString.config(font=('helvetica', 12))
+canvas1.create_window(100, 120, window=lblSearchString)
 
-    #lblSearchDirLabel = tk.Label(MDIWnd, text='Input File 1:', bd=1, relief="sunken")
-    lblSearchDirLabel = tk.Label(MDIWnd, text='Folder Path to Search:')
-    lblSearchDirLabel.config(font=('helvetica', 10))
-    lblSearchDirLabel.grid(row=1, column=2, sticky='e', pady=1)
+# Text box
+txtSearchString = tk.Entry (MDIWnd, width = 45) 
+canvas1.create_window(330, 120, window=txtSearchString)
 
-    # Selected InFile1
-    lblSearchDirText = tk.Label(MDIWnd, text="")
-    lblSearchDirText.config(font=('helvetica', 10))
-    lblSearchDirText.grid(row=1, column=3, sticky='w')
+# Buttons
+btnGetPath = tk.Button(text='Select Folder', command=getDirPath, bg='blue', fg='white', font=('helvetica',12, 'bold'))
+canvas1.create_window(100, 220, window=btnGetPath)
 
+btnSearch = tk.Button(text='Search Files', command=searchFiles, bg='blue', fg='white', font=('helvetica',12, 'bold'))
+canvas1.create_window(250, 220, window=btnSearch)
 
-    ###############################
-    # Columns to Omit
-    ###############################
-    lblSearchString = tk.Label(MDIWnd, text='Enter Search String:')
-    lblSearchString.config(font=('helvetica', 10))
-    lblSearchString.grid(row=4, column=2, sticky='e', pady=3)
+#button1 = tk.Button(text='File Exists?', command=checkFile, bg='brown', fg='white', font=('helvetica',12, 'bold'))
+#canvas1.create_window(300, 200, window=button1)
 
-    txtSearchString = tk.Entry (MDIWnd, width=90, justify="left") 
-    txtSearchString.grid(row=4, column=3, sticky='w')
-
-    ###############################
-    # Buttons
-    ###############################
-    bthSearchFiles = tk.Button(text='Search Files', command=lambda:searchFiles(), bg='blue', fg='white', font=('helvetica',10, 'bold'))
-    bthSearchFiles.grid(row=6, column=3, sticky='w', pady=10)
-
-    ####################################
-    # Process Window messages
-    ####################################
-    MDIWnd.mainloop()
+MDIWnd.mainloop()
 
 
-if __name__ == "__main__":
-    
-    main()
 
 
 
