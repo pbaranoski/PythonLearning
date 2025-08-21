@@ -1,0 +1,34 @@
+{
+    "fileInformation": [
+        {
+            "fileName": "Mickey.txt",
+            "fileLocation": "xtr/DEV/Blbtn"
+        },
+        {
+            "fileName": "Donald.jpg",
+            "fileLocation": "xtr/DEV/Blbtn"
+        },
+        {
+            "fileName": "Rigby.txt",
+            "fileLocation": "xtr/DEV/Blbtn"
+        },
+        {
+            "fileName": "Bugs.csv.gz",
+            "fileLocation": "xtr/DEV/Blbtn"
+        }
+    ],
+    "ShareDetails": {
+        "dataRequestID": "dataRequestID",
+        "shareduration": 1,
+        "dataRecepientEmails": "pbaranoski@apprioinc.com,jturner@apprioinc.com,SGayam@apprioinc.com",
+        "totalNumberOfFiles": 4,
+        "totalExtractFileSize": "4",
+        "totalExtractFileSizeUnit": "MB"
+    },
+    "requestorContactInfo": {
+        "fullName": "fullName",
+        "phoneNumber": "phoneNumber",
+        "email": "email"
+    },
+    "comments": "Mickey Mouse loves Minnie!"
+}

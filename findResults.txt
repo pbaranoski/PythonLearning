@@ -1,0 +1,5 @@
+./Master.sh.log
+./ICR
+./ICR/SOP -FCR-ICR Process 2020 20200630.docx
+./ICR/UNIX scripts
+./ICR/UNIX scripts/tso rexx test examples.txt
